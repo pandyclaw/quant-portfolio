@@ -22,7 +22,7 @@ This repository contains research and implementation of three systematic strateg
 ## Quick Start
 
 ```bash
-git clone https://github.com/yourusername/quant-portfolio.git
+git clone https://github.com/pandyclaw/quant-portfolio.git
 cd quant-portfolio
 pip install -e ".[dev]"
 
@@ -91,6 +91,10 @@ Every strategy undergoes three statistical tests before results are reported:
 - Kelly, J. L. (1956). "A New Interpretation of Information Rate." *Bell System Technical Journal*.
 - Chan, E. (2013). *Algorithmic Trading: Winning Strategies and Their Rationale*. Wiley.
 - Lopez de Prado, M. (2018). *Advances in Financial Machine Learning*. Wiley.
+
+## Author
+
+**Anthony Shi** — Quantitative researcher focused on systematic trading across equity indices, precious metals, and cross-asset momentum. Background in venture capital analysis and software engineering. Currently building automated trading infrastructure with institutional-grade risk controls, paper trading systematic strategies, and developing custom TradingView indicators for real-time market analysis.
 
 ## Disclaimers
 

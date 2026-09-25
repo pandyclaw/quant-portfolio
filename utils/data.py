@@ -195,7 +195,11 @@ def generate_sample_data(
         if data.empty:
             print(f"  WARNING: No data for {sym}")
             continue
-        data.columns = [c.lower() for c in data.columns]
+        # Handle MultiIndex columns from newer yfinance versions
+        if isinstance(data.columns, pd.MultiIndex):
+            data.columns = [c[0].lower() for c in data.columns]
+        else:
+            data.columns = [c.lower() for c in data.columns]
         path = SAMPLE_DIR / f"{sym.lower()}_daily_sample.csv"
         data.to_csv(path)
         print(f"  Saved {len(data)} rows to {path.name}")
