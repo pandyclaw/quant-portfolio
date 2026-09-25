@@ -127,8 +127,10 @@ class GoldSilverPairs:
         FitResult
             Diagnostics including cointegration status and parameters.
         """
-        y = prices_y.values.astype(float)
-        x = prices_x.values.astype(float)
+        # Drop NaN/inf values (yfinance data can have gaps)
+        mask = np.isfinite(prices_y.values) & np.isfinite(prices_x.values)
+        y = prices_y.values[mask].astype(float)
+        x = prices_x.values[mask].astype(float)
         n = len(y)
 
         # Step 1: OLS for static hedge ratio
@@ -196,19 +198,23 @@ class GoldSilverPairs:
         pd.DataFrame
             Columns: hedge_ratio, spread, z_score, signal, position
         """
-        y = prices_y.values.astype(float)
-        x = prices_x.values.astype(float)
+        y = prices_y.ffill().bfill().values.astype(float)
+        x = prices_x.ffill().bfill().values.astype(float)
         n = len(y)
 
-        # Run Kalman filter
+        # Run Kalman filter (skip NaN/inf values)
         self._kalman_state = None
         hedge_ratios = np.zeros(n)
         spreads = np.zeros(n)
 
         for i in range(n):
-            hr, sp = self._kalman_update(y[i], x[i])
-            hedge_ratios[i] = hr
-            spreads[i] = sp
+            if np.isfinite(y[i]) and np.isfinite(x[i]):
+                hr, sp = self._kalman_update(y[i], x[i])
+                hedge_ratios[i] = hr
+                spreads[i] = sp
+            elif i > 0:
+                hedge_ratios[i] = hedge_ratios[i - 1]
+                spreads[i] = spreads[i - 1]
 
         # Rolling z-score (using only past data — no look-ahead)
         z_scores = np.zeros(n)
