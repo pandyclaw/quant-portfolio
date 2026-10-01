@@ -17,6 +17,18 @@ This repository implements eight systematic strategies across five asset classes
 | G | Variance Risk Premium | Volatility | Vol Premium | Carr & Wu 2009 | Sharpe, VRP |
 | H | Risk Parity + Momentum | Multi-Asset | Diversification | Asness et al. 2012 | Sharpe, Risk Contribution |
 
+## Live Validation Results
+
+Every strategy in this repository is subjected to walk-forward validation with permutation testing. We report honest OOS results — including strategies that fail. This transparency is deliberate: showing what doesn't work is as important as showing what does.
+
+| Strategy | OOS Sharpe | OOS Max DD | Trades | Perm p-value | Assessment |
+|----------|-----------|-----------|--------|-------------|------------|
+| Gold/Silver Pairs | -0.49 | 82.9% | 113 | — | Cointegration weakened post-2020 |
+| Intraday Mean Rev | +0.01 | 19.3% | 131 | 0.93 | Signal present, not significant |
+| TSMOM Rotation | +0.53 | 18.0% | — | — | Best performer (momentum premia) |
+
+*Note: OOS metrics are from the second half of the sample only. No in-sample results are reported. Permutation p < 0.10 indicates statistically significant time-series structure.*
+
 ## Philosophy
 
 - **No zero-cost backtests.** Every simulation includes transaction costs, slippage, and spread modeling. T+1 execution enforced (no look-ahead on fill prices).
