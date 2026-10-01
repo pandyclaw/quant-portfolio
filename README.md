@@ -26,6 +26,8 @@ Every strategy in this repository is subjected to walk-forward validation with p
 | Gold/Silver Pairs | -0.49 | 82.9% | 113 | — | Cointegration weakened post-2020 |
 | Intraday Mean Rev | +0.01 | 19.3% | 131 | 0.93 | Signal present, not significant |
 | TSMOM Rotation | +0.53 | 18.0% | — | — | Best performer (momentum premia) |
+| Turn-of-Month | +0.09 | 19.0% | 71 | 0.50 | Calendar effect not significant in recent data |
+| Vol-Scaled Momentum | +0.16 | 18.0% | 532 | 0.47 | Positive but not significant |
 
 *Note: OOS metrics are from the second half of the sample only. No in-sample results are reported. Permutation p < 0.10 indicates statistically significant time-series structure.*
 
