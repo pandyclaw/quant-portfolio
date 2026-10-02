@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import numpy as np
 import pandas as pd
-
 from strategies.intraday_mean_reversion import IntradayMeanReversion
 
 
